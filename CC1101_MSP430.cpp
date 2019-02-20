@@ -2,7 +2,7 @@
 //Modifying in order to remove EEPROM usage
 //Modifying to add MSP430 support
 /*------------------------------------------------------------------------------
-'                     CC1101 Arduino Library
+'                     CC1101 MSP430 Library
 '                     ----------------------
 '
 '  module contains helper code from other people. Many thanks for that.
