@@ -34,11 +34,11 @@ Check the examples for basic usage.
 Download this repository to your computer using [git](https://git-scm.com/):
 
 ```
-git clone https://github.com/abhra0897/MSP430-CC1101-Energia-Library.git
+https://github.com/abhra0897/msp430_cc1101_energia_v2.git
 ```
 
 #### Install
-Put this folder in your Energia libraries folder. Restart Energia. Then load the examples from "File->Examples->CC1101_MSP430_energia_v2" (note you need two radios to test functionality, a reciever and a transmitter).
+Put this folder in your Energia libraries folder. Restart Energia. Then load the examples from "File-> Examples-> CC1101_MSP430_energia_v2" (note you need two radios to test functionality, a reciever and a transmitter).
 
 #### Pinouts
 For each launchpad, reference [this pin description image of the CC1101](http://www.kooing.com/image/cache/data/CC1101_3-500x500.jpg). The proper orientation is with the antenna facing to your right, with the text "RF1100SE" in the correct orientation.
