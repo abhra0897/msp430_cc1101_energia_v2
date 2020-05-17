@@ -69,7 +69,7 @@ Reference the [pinout](http://energia.nu/img/LaunchPadMSP430FR5739-v1.1.jpg) for
 	GND  -> GND
 
 #### MSP430FR5969 Launchpad Pinout
-Reference the [pinout](http://energia.nu/wordpress/wp-content/uploads/2014/10/LaunchPad-with-MSP430FR5969.jpg) for this launchpad, and the [pinout](http://www.kooing.com/image/cache/data/CC1101_3-500x500.jpg) for the CC1101.
+Reference the [pinout](https://energia.nu/pinmaps/img/MSP-EXP430FR5969.jpg) for this launchpad, and the [pinout](http://www.kooing.com/image/cache/data/CC1101_3-500x500.jpg) for the CC1101.
 
 	VDD  -> VCC
 	SI   -> 15 / P1.6
@@ -78,6 +78,18 @@ Reference the [pinout](http://energia.nu/wordpress/wp-content/uploads/2014/10/La
 	SCK  -> 7  / P2.2
 	GDO2 -> 10 / P3.6
 	GDO0 -> 8  / P3.4
+	GND  -> GND
+
+#### MSP430FR5994 Launchpad Pinout
+Reference the [pinout](https://energia.nu/pinmaps/img/MSP-EXP430FR5994.jpg) for this launchpad, and the [pinout](http://www.kooing.com/image/cache/data/CC1101_3-500x500.jpg) for the CC1101.
+
+	VDD  -> VCC
+	SI   -> 15 / P5.0
+	SO   -> 14 / P5.1
+	CSn  -> 17 / P5.3
+	SCK  -> 7  / P5.2
+	GDO2 -> 12 / P8.2
+	GDO0 -> 11 / P8.1
 	GND  -> GND
 
 #### MSP430FR6989 Launchpad Pinout
