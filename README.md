@@ -1,9 +1,9 @@
 ### CC1101 MSP430 Energia Library v2
 
-Last updated (20 Feb, 2019)
+Last updated (18 May, 2020)
 
 #### Note
-This is the 2nd version of my first driver library of CC1101 for MSP430 (on energia framework, similar to Arduino). This version is almost entirely different from the previous version. Now it supports al the frequency ranges, has many more communication modes, and lots of other features. It works perfectly too unlike the previous version with neverending bugs  :P . 
+This is the 2nd version of my first driver library of CC1101 for MSP430 (on energia framework, similar to Arduino). This version is almost entirely different from the previous version. Now it supports al the frequency ranges, has many more communication modes, and lots of other features.
 
 ##### If you want to communicate between a MSP430 and an Arduino (AVR based), use this library for MSP430 and SpaceTeddy's library for Arduino (https://github.com/SpaceTeddy/CC1101).
 
@@ -12,8 +12,9 @@ This is done based on the SpaceTeddy's CC1101-Arduino library. I added the hardw
 The supported MCU (and launchpad) list is given below.
 
 ##### Credits
-SpaceTeddy (https://github.com/SpaceTeddy)
-Josiah Hester (jhester) (https://github.com/jhester)
+- [SpaceTeddy](https://github.com/SpaceTeddy)
+- [Josiah Hester](https://github.com/jhester)
+- [Daniel Tsai](https://github.com/daniel0076)
 
 #### Supported Frequencies
 - 315 MHz
@@ -26,12 +27,13 @@ Josiah Hester (jhester) (https://github.com/jhester)
 - EXP-MSP430FR5739
 - EXP-MSP430FR5969
 - EXP-MSP430FR6989
+- MSP430FR5994 (Contributed by [Daniel Tsai](https://github.com/daniel0076) )
 
 Check the examples for basic usage.
 
 
 #### Download
-Download this repository to your computer using [git](https://git-scm.com/):
+Download this repository using [git](https://git-scm.com/):
 
 ```
 https://github.com/abhra0897/msp430_cc1101_energia_v2.git
@@ -125,7 +127,7 @@ use **uint8_t CC1100::begin(volatile uint8_t &My_addr)** always as first configu
 
 ##### Device address
 
-you should set a unique device address for the transmitter and a unique device address for the receiver. 
+you should set a unique device address for the transmitter and a unique device address for the receiver.
 This can be done with **void CC1100::set_myaddr(uint8_t addr)**.
 
 i.E. -> TX = 0x01 ; RX = 0x03
@@ -172,25 +174,25 @@ you can set a frequency operation band by **void CC1100::set_ISM(uint8_t ism_fre
 
     // Resets the CC1101 module following the reset sequence
     void reset(void);
-    
+
     // Enables powersaving mode of CC1101. Consumes around 200nA
     void powerdown(void);
 
     // Enables Wakeup-On-Radio mode. If enabled, CC1101 wakes up automatically when packet is received
     void wor_enable(void);
-    
+
     // Disables WOR
     void wor_disable(void);
-    
+
     // Resets WOR
     void wor_reset(void);
 
     // Sets CC1101 in idle mode
     uint8_t sidle(void);
-    
+
     // Enables transmit mode
     uint8_t transmit(void);
-    
+
     // Enables receive mode
     uint8_t receive(void);
 
@@ -215,19 +217,19 @@ you can set a frequency operation band by **void CC1100::set_ISM(uint8_t ism_fre
 
     // This method sets your address (rx or tx)
     void set_myaddr(uint8_t addr);
-    
+
     // Sets the channel. Rx and Tx must be in same channel.
     void set_channel(uint8_t channel);
-    
+
     // Sets the frequency you want to use. Pass the index number of the desired ISM band.
     void set_ISM(uint8_t ism_freq);
-    
+
     // Sets the modulation mode. Pass the index number.
     void set_mode(uint8_t mode);
-    
+
     // Sets the transmitter's output power in dBm. (-30dBm to 10dBm)
     void set_output_power_level(int8_t dbm);
-    
+
     *** To know all the available methods, check the CC1101_MSP430.h file
 
 #### License
