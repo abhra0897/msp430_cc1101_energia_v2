@@ -136,7 +136,7 @@ class CC1101
 
         void spi_begin(void);
         void GDO_set (void);
-        //void spi_end(void);
+        void spi_end(void);
         uint8_t spi_putc(uint8_t data);
 
     public:
@@ -190,7 +190,7 @@ class CC1101
         int8_t rssi_convert(uint8_t Rssi);
         uint8_t check_crc(uint8_t lqi);
         uint8_t lqi_convert(uint8_t lqi);
-        //uint8_t get_temp(uint8_t *ptemp_Arr);
+        uint8_t get_temp(uint8_t *ptemp_Arr);
 
         void set_myaddr(uint8_t addr);
         void set_channel(uint8_t channel);

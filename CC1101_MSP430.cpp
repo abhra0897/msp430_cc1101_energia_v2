@@ -1,12 +1,12 @@
-/*---------------[ changes ]------------------------*/
-//Modifying in order to remove EEPROM usage
-//Modifying to add MSP430 support
-/*------------------------------------------------------------------------------
-'                     CC1101 MSP430 Library
-'                     ----------------------
-'
-'  module contains helper code from other people. Many thanks for that.
-'-----------------------------------------------------------------------------*/
+/**
+ * CC1101 Driver library for MSP430
+ * This library needs Energia framework (similar to Arduino, but for MSP430).
+ * It is based on spaceteddy's CC1101 driver library for Arduino and is fully comptible with the same.
+
+ * To compile it without Energia, replace PinMode(), delay(), delayMicroseconds(),
+ * serial.println() etc. energia specific functions with hardware specific implementation.
+
+*/
 #include <CC1101_MSP430.h>
 //#include "pins.h"
 
@@ -455,7 +455,7 @@ uint8_t CC1101::begin(volatile uint8_t &My_addr)
 void CC1101::end(void)
 {
     powerdown();                          //power down CC1101
-    //spi_end();                            //disable SPI Interface
+    spi_end();                            //disable SPI Interface (Does nothing for MSP430)
 }
 //-------------------------------[end]------------------------------------------
 
@@ -682,12 +682,12 @@ uint8_t CC1101::send_packet(uint8_t my_addr, uint8_t rx_addr, uint8_t *txbuffer,
         return TRUE;
 
         /*========================READ ME============================
-        
+
         The below part is for advanced communication purposes.
         It works but commeted out to keep things simple.
         You can uncomment it to access the features (like message delivery confirmation).
         Read the inline comments below carefully.
-        
+
         =============================================================*/
 
        /*----------------------------------------------------------------
@@ -955,7 +955,7 @@ void CC1101::set_ISM(uint8_t ism_freq)
                     spi_write_register(FREQ1,freq1);
                     spi_write_register(FREQ0,freq0);
                     spi_write_burst(PATABLE_BURST, (uint8_t*)patable_power_315,8);                                //writes output power settings to CC1101
-                    
+
                     break;
         case 0x02:                                                          //433.92MHz
                     freq2=0x10;
@@ -965,7 +965,7 @@ void CC1101::set_ISM(uint8_t ism_freq)
                     spi_write_register(FREQ1,freq1);
                     spi_write_register(FREQ0,freq0);
                     spi_write_burst(PATABLE_BURST, (uint8_t*)patable_power_433,8);                                //writes output power settings to CC1101
-                    
+
                     break;
         case 0x03:                                                          //868.3MHz
                     freq2=0x21;
@@ -987,7 +987,7 @@ void CC1101::set_ISM(uint8_t ism_freq)
                     spi_write_burst(PATABLE_BURST, (uint8_t*)patable_power_915,8);                                //writes output power settings to CC1101
 
                     break;
-        
+
         default:                                                             //default is 868.3MHz
                     freq2=0x21;
                     freq1=0x65;
@@ -1166,47 +1166,21 @@ uint8_t CC1101::check_crc(uint8_t lqi)
 }
 //-------------------------------[end]------------------------------------------
 
-/*
+
 //----------------------------[get temp]----------------------------------------
 uint8_t CC1101::get_temp(uint8_t *ptemp_Arr)
 {
-    const uint8_t num_samples = 8;
-    uint16_t adc_result = 0;
-    uint32_t temperature = 0;
-
-    sidle();                              //sets CC1101 into IDLE
-    spi_write_register(PTEST,0xBF);       //enable temp sensor
-    delay(50);                            //wait a bit
-
-    for(uint8_t i=0;i<num_samples;i++)    //sampling analog temperature value
-    {
-        adc_result += analogRead(GDO0);
-        delay(1);
-    }
-    adc_result = adc_result / num_samples;
-    //Serial.println(adc_result);
-
-    temperature = (adc_result * CC1101_TEMP_ADC_MV) / CC1101_TEMP_CELS_CO;
-
-    ptemp_Arr[0] = temperature / 10;      //cut last digit
-    ptemp_Arr[1] = temperature % 10;      //isolate last digit
-
-    if(debug_level > 0){
-        Serial.print(F("Temp:"));Serial.print(ptemp_Arr[0]);Serial.print(F("."));Serial.println(ptemp_Arr[1]);
-    }
-
-    spi_write_register(PTEST,0x7F);       //writes 0x7F back to PTest (app. note)
-
-    receive();
-    return (*ptemp_Arr);
+     /// as we're not using GDO0 for MSP430, get_temp is not used
+     /// It's just kept here for compatibility purpose
+     return 0;
 }
 //-------------------------------[end]------------------------------------------
-*/
+
 
 //|==================== SPI Initialisation for CC1101 =========================|
 void CC1101::spi_begin(void)
 {
-    
+
     //|--- Activating the SPI interface of MSP430--------|
     //|--- The Macros are defined in pins.h -------------|
 
@@ -1228,34 +1202,23 @@ void CC1101::GDO_set()
 	CONFIG_GDO2_PIN_AS_INPUT();
 }
 
-/*
+
 //|==================== SPI Initialisation for CC1101 =========================|
 
 void CC1101::spi_end(void)
 {
-    pinMode(SCK_PIN, INPUT);
-    pinMode(MOSI_PIN, INPUT);
-    pinMode(MISO_PIN, INPUT);
-    pinMode(SS_PIN, INPUT);
-
-   SPCR = ((0<<SPE) |                   // SPI Enable
-           (0<<SPIE)|                   // SPI Interupt Enable
-           (0<<DORD)|                   // Data Order (0:MSB first / 1:LSB first)
-           (1<<MSTR)|                   // Master/Slave select
-           (0<<SPR1)|(0<<SPR0)|         // SPI Clock Rate ( 0 0 = osc/4; 0 1 = osc/16; 1 0 = osc/64; 1 1= 0sc/128)
-           (0<<CPOL)|                   // Clock Polarity (0:SCK low / 1:SCK hi when idle)
-           (0<<CPHA));                  // Clock Phase (0:leading / 1:trailing edge sampling)
-
-   SPSR =  (0<<SPI2X);                  // Double Clock Rate
+     /// Not needed, so unimplemented
+     /// Kept here for compatibility purpose
+	return;
 }
 //-------------------------------[end]------------------------------------------
-*/
+
 
 
 //|============================= SPI Transmission =============================|
 uint8_t CC1101::spi_putc(uint8_t data)
 {
- 
+
     SPI_WRITE_BYTE(data);
     SPI_WAIT_DONE();
     uint8_t statusByte = SPI_READ_BYTE();
