@@ -1,33 +1,30 @@
 ### CC1101 MSP430 Energia Library v2
 
-Last updated (18 May, 2020)
+Last updated (19 May, 2020)
 
 #### Note
-This is the 2nd version of my first driver library of CC1101 for MSP430 (on energia framework, similar to Arduino). This version is almost entirely different from the previous version. Now it supports al the frequency ranges, has many more communication modes, and lots of other features.
+This is the 2nd version of my first driver library of CC1101 for MSP430 (on energia framework, similar to Arduino). This version is almost entirely different from the previous version. Now it supports all the frequency ranges, has many more communication modes, and lots of other features.
 
 ##### If you want to communicate between a MSP430 and an Arduino (AVR based), use this library for MSP430 and SpaceTeddy's library for Arduino (https://github.com/SpaceTeddy/CC1101).
 
-This is done based on the SpaceTeddy's CC1101-Arduino library. I added the hardware support for MSP430 and memory optimized the code whereever possible. The library supports FRAM series MSP430 launchpads: EXP-MSP430FR5739, MSP430FR5969, and MSP430FR6989. The EXP430G2 launchpad with MSP430G2553 MCU is also supported. It should also work with any MSP430G2x53 and MSP430G2x13 MCU.
-( Maybe it will work with MSP430G2452 too? )
+This is done based on the SpaceTeddy's CC1101-Arduino library. I added the hardware support for MSP430 and memory optimized the code at some places.
 The supported MCU (and launchpad) list is given below.
 
-##### Credits
-- [SpaceTeddy](https://github.com/SpaceTeddy)
-- [Josiah Hester](https://github.com/jhester)
-- [Daniel Tsai](https://github.com/daniel0076)
+
+#### Supported Launchpads/MCUs
+- MSP-EXP430G2 w/ MSP430G2x53 or MSP430G2x13 MCU
+- MSP-EXP430FR5739
+- MSP-EXP430FR5969
+- MSP-EXP430FR6989
+- MSP-EXP430FR5994 (Contributed by [Daniel Tsai](https://github.com/daniel0076) )
+- MSP-EXP430FR2355 w/ MSP430FR2355 or MSP430FR2353 MCU
+
 
 #### Supported Frequencies
 - 315 MHz
 - 433 MHz
 - 868 MHz
 - 915 MHz
-
-#### Supported Launchpads/MCUs
-- EXP-MSP430G2 w/ MSP430G2x53 or MSP430G2x13 MCU
-- EXP-MSP430FR5739
-- EXP-MSP430FR5969
-- EXP-MSP430FR6989
-- MSP430FR5994 (Contributed by [Daniel Tsai](https://github.com/daniel0076) )
 
 Check the examples for basic usage.
 
@@ -94,8 +91,20 @@ Reference the [pinout](https://energia.nu/pinmaps/img/MSP-EXP430FR5994.jpg) for 
 	GDO0 -> 11 / P8.1
 	GND  -> GND
 
+#### MSP430FR2355 Launchpad Pinout
+Reference the [pinout](https://www.ti.com/lit/pdf/slau680) for this launchpad, and the [pinout](http://www.kooing.com/image/cache/data/CC1101_3-500x500.jpg) for the CC1101.
+
+    VDD  -> VCC
+    SI   -> 1.2
+    SO   -> 1.3
+    CSn  -> P3.3
+    SCK  -> P1.1
+    GDO2 -> P3.2
+    GDO0 -> P3.1
+    GND  -> GND
+
 #### MSP430FR6989 Launchpad Pinout
-Reference the [pinout](http://energia.nu/img/LaunchPadMSP430FR5739-v1.1.jpg) for this launchpad, and the [pinout](http://energia.nu/wordpress/wp-content/uploads/2015/07/MSP430FR6989_pinmap.png) for the CC1101.
+Reference the [pinout](http://energia.nu/wordpress/wp-content/uploads/2015/07/MSP430FR6989_pinmap.png) for this launchpad, and the [pinout](http://www.kooing.com/image/cache/data/CC1101_3-500x500.jpg) for the CC1101.
 
 	VDD  -> 3v3
 	SI   -> 15 / P1.6
@@ -231,6 +240,14 @@ you can set a frequency operation band by **void CC1100::set_ISM(uint8_t ism_fre
     void set_output_power_level(int8_t dbm);
 
     *** To know all the available methods, check the CC1101_MSP430.h file
+
+
+
+##### Thanks to
+- [SpaceTeddy](https://github.com/SpaceTeddy)
+- [Josiah Hester](https://github.com/jhester)
+- [Daniel Tsai](https://github.com/daniel0076)
+
 
 #### License
 The MIT License (MIT)
