@@ -480,14 +480,16 @@ st ( \
   UCB0CTLW0 |= UCSWRST;                           \
   UCB0CTLW0 |= UCSWRST | UCSSEL_2;                 \
   UCB0CTLW0 |= UCCKPH | UCMSB | UCMST | UCSYNC;   \
-  UCB0BR0  = 0x02;                                 \
+  UCB0BR0  = 0x04;                                /*CC1101 can support max 10MHz. So, reducing the clock here*/ \ 
   UCB0BR1  = 0;                                 \
   SPI_CONFIG_PORT();                       \
   UCB0CTLW0 &= ~UCSWRST;                         \
 )
 
 /* read/write macros */
-#define SPI_WRITE_BYTE(x)                st( UCB0IFG &= ~UCRXIFG;  UCB0TXBUF = x; )
+#define SPI_WRITE_BYTE(x)                st( \
+                                          while(!(UCB0IFG & UCTXIFG)); /*while txbuf is not empty, wait*/\
+                                          UCB0IFG &= ~UCRXIFG;  UCB0TXBUF = x; )
 #define SPI_READ_BYTE()                  UCB0RXBUF
 #define SPI_WAIT_DONE()                  while(!(UCB0IFG & UCRXIFG));
 
