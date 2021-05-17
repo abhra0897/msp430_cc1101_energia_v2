@@ -489,7 +489,7 @@ st ( \
 /* read/write macros */
 #define SPI_WRITE_BYTE(x)                st( \
                                           while(!(UCB0IFG & UCTXIFG)); /*while txbuf is not empty, wait*/\
-                                          UCB0IFG &= ~UCRXIFG;  UCB0TXBUF = x; )
+                                          UCB0TXBUF = x; )
 #define SPI_READ_BYTE()                  UCB0RXBUF
 #define SPI_WAIT_DONE()                  while(!(UCB0IFG & UCRXIFG));
 
