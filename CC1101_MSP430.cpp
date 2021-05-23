@@ -679,18 +679,6 @@ uint8_t CC1101::send_packet(uint8_t my_addr, uint8_t rx_addr, uint8_t *txbuffer,
         transmit();                                             //sends data over air
         receive();                                              //receive mode
 
-        return TRUE;
-
-        /*========================READ ME============================
-
-        The below part is for advanced communication purposes.
-        It works but commeted out to keep things simple.
-        You can uncomment it to access the features (like message delivery confirmation).
-        Read the inline comments below carefully.
-
-        =============================================================*/
-
-       /*----------------------------------------------------------------
         if(rx_addr == BROADCAST_ADDRESS){                       //no wait acknowledge if send to broadcast address or tx_retries = 0
             return TRUE;                                        //successful send to BROADCAST_ADDRESS
         }
@@ -718,7 +706,7 @@ uint8_t CC1101::send_packet(uint8_t my_addr, uint8_t rx_addr, uint8_t *txbuffer,
             Serial.print(F(" #:"));
             uart_puthex_byte(tx_retries_count-1);
             Serial.println();
-      }*/
+      }
     }while(tx_retries_count <= tx_retries);                     //while count of retries is reaches
 
     return FALSE;                                               //send failed. too many retries
