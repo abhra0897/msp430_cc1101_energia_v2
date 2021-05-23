@@ -1,6 +1,6 @@
 ### CC1101 MSP430 Energia Library v2
 
-Last updated (19 May, 2020)
+Last updated (May 23, 2021)
 
 #### Note
 This is the 2nd version of my first driver library of CC1101 for MSP430 (on energia framework, similar to Arduino). This version is almost entirely different from the previous version. Now it supports all the frequency ranges, has many more communication modes, and lots of other features.
@@ -17,7 +17,9 @@ The supported MCU (and launchpad) list is given below.
 - MSP-EXP430FR5969
 - MSP-EXP430FR6989
 - MSP-EXP430FR5994 (Contributed by [Daniel Tsai](https://github.com/daniel0076) )
-- MSP-EXP430FR2355 w/ MSP430FR2355 or MSP430FR2353 MCU
+- [ **!** ] MSP-EXP430FR2355 w/ MSP430FR2355 or MSP430FR2353 MCU
+
+*[ **!** : There's problem with SPI for MSP430FR2355 ass per Issue #3. Please report if you face it too ]*
 
 
 #### Supported Frequencies
@@ -167,6 +169,7 @@ you can set a frequency operation band by **void CC1100::set_ISM(uint8_t ism_fre
 
 #### Important API Methods
 
+```C
     //Enable or disable debug output with 1 or 0
     uint8_t set_debug_level(uint8_t set_debug_level);
 
@@ -240,7 +243,7 @@ you can set a frequency operation band by **void CC1100::set_ISM(uint8_t ism_fre
     void set_output_power_level(int8_t dbm);
 
     *** To know all the available methods, check the CC1101_MSP430.h file
-
+```
 
 
 ##### Thanks to
